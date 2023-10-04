@@ -1,6 +1,7 @@
 ---
 title: "Data Visualization: Tables"
-output: html_notebook
+#output: html_notebook
+output: github_document
 ---
 
 ```{r LIBRARIES, warning=FALSE}
