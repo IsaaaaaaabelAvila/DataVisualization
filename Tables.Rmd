@@ -1,7 +1,8 @@
 ---
-title: "Data Visualization: Tables"
-#output: html_notebook
-output: github_document
+title: 'Data Visualization: Tables'
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r LIBRARIES, warning=FALSE}
@@ -23,7 +24,7 @@ simple_table <- formattable(data,
                             align = c("c", "c"))
 
 # Adjust the simple tables' width
-as.htmlwidget(simple_table, width = 500)
+as.htmlwidget(simple_table, width = 400)
 ```
 
 ```{r CONDITIONALLY FORMATTED CELLS}
@@ -35,7 +36,7 @@ cond_table <- formattable(data,
 )
 
 # Adjust the conditionally formatted tables' width
-as.htmlwidget(cond_table, width=400)
+as.htmlwidget(cond_table, width = 400)
 ```
 
 ```{r FORMATTER RED / GREEN}
@@ -50,7 +51,7 @@ cond_table2 <- formattable(data,
                           align = c("c", "c"))
 
 # Adjust the conditionally formatted tables' width
-as.htmlwidget(cond_table2, width=400)
+as.htmlwidget(cond_table2, width = 400)
 ```
 
 ```{r}
@@ -60,6 +61,6 @@ cond_table3 <- formattable(data,
                           align = c("c", "c"))
 
 # Adjust the conditionally formatted tables' width
-as.htmlwidget(cond_table3, width=400)
+as.htmlwidget(cond_table3, width = 400)
 ```
 
