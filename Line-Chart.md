@@ -1,20 +1,7 @@
----
-title: 'Data Visualization: Line Chart'
-output: github_document
-editor_options: 
-  chunk_output_type: console
----
+Data Visualization: Line Chart
+================
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
-
-```{r LIBRARIES, message=FALSE, warning=FALSE}
+``` r
 library(data.table)
 library(dplyr)
 
@@ -24,11 +11,11 @@ library(formattable)
 library(DT)
 ```
 
-```{r DATA}
+``` r
 data <- head(airquality[, c("Day", "Temp")], 10)
 ```
 
-```{r}
+``` r
 # Create line chart theme
 theme_swd_line <-   theme(
   plot.title = element_text(size = rel(1.75), color = "#000000"),
@@ -66,4 +53,11 @@ ggplot(data, aes(x = Day, y = Temp)) +
     size = 3.25,
     color = "#014991",
     fontface = "bold")
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#> ℹ Please use `linewidth` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
