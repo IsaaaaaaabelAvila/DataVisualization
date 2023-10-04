@@ -60,4 +60,4 @@ ggplot(data, aes(x = Day, y = Temp)) +
 #> generated.
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="figuresunnamed-chunk-2-1.png" width="100%" />
