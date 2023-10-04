@@ -1,11 +1,18 @@
 ---
 title: 'Data Visualization: Tables'
-output:
-  html_document:
-    df_print: paged
+output: html_document
 ---
 
-```{r LIBRARIES, warning=FALSE}
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "figures",
+  out.width = "100%"
+)
+```
+
+```{r LIBRARIES, message=FALSE, warning=FALSE}
 library(data.table)
 library(dplyr)
 
