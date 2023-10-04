@@ -1,0 +1,64 @@
+---
+title: "Data Visualization: Tables"
+output: html_notebook
+---
+
+```{r LIBRARIES, warning=FALSE}
+library(data.table)
+library(dplyr)
+
+library(ggplot2)
+library(scales)
+library(formattable)
+library(DT)
+```
+
+```{r SIMPLE TABLE}
+data <- head(airquality[, c("Day", "Temp")], 10)
+
+# Define a simple table
+simple_table <- formattable(data,
+                            col.names = c("Day", "Temp"),
+                            align = c("c", "c"))
+
+# Adjust the simple tables' width
+as.htmlwidget(simple_table, width = 500)
+```
+
+```{r CONDITIONALLY FORMATTED CELLS}
+# Define a table with conditionally formatted cells
+cond_table <- formattable(data, 
+                          col.names = c("Day", "Temp"),
+                          list(Temp = color_tile("white", "#014991")), # Indicate the name of the column
+                          align = c("c", "c")
+)
+
+# Adjust the conditionally formatted tables' width
+as.htmlwidget(cond_table, width=400)
+```
+
+```{r FORMATTER RED / GREEN}
+#Create a formatter to display the red/green and arrow up/down indicators.
+sign_formatter <- formatter("span", 
+                            style = x ~ style(color = ifelse(x > 60, "#168346",
+                                                      ifelse(x < 60, "#C3514E", "black"))))
+
+cond_table2 <- formattable(data, 
+                          col.names = c("Day", "Temp"),
+                          list(Temp = sign_formatter), # Indicate the name of the column
+                          align = c("c", "c"))
+
+# Adjust the conditionally formatted tables' width
+as.htmlwidget(cond_table2, width=400)
+```
+
+```{r}
+cond_table3 <- formattable(data, 
+                          col.names = c("Day", "Temp"),
+                          list(Temp = color_bar("#63a2eb")), # Indicate the name of the column
+                          align = c("c", "c"))
+
+# Adjust the conditionally formatted tables' width
+as.htmlwidget(cond_table3, width=400)
+```
+
