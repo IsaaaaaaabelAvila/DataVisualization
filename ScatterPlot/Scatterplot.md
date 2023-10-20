@@ -1,0 +1,60 @@
+Data Visualization: ScatterPlot
+================
+
+``` r
+library(data.table)
+library(dplyr)
+
+library(ggplot2)
+library(scales)
+library(formattable)
+library(DT)
+```
+
+``` r
+data <- head(airquality[, c("Day", "Temp", "Wind")], 20)
+```
+
+# S C A T T E R P L O T
+
+``` r
+# Create a scatterplot
+ggplot(data, aes(x = Temp, y = Wind)) +
+  geom_point(color = "grey") +  # Set points to grey
+  geom_point(aes(x = mean(Temp), y = mean(Wind)), 
+             color = "black", size = 2, shape = 19) +# Add a bold point for the average
+  geom_text(aes(x = mean(Temp), y = mean(Wind), 
+                label = "AVG"), vjust = 0, hjust = 1.5) +
+  theme(axis.title.y = element_text(angle = 90, hjust = 1),  # Align y-axis label to the left
+        axis.title.x = element_text(hjust = 0),  # Align x-axis label to the left
+        panel.grid.major = element_blank(),  # Change background
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "gray")) + 
+  ggtitle("Scatterplot of Data")  # Add a title
+```
+
+<img src="figuresunnamed-chunk-2-1.png" width="100%" />
+
+``` r
+ggplot(data, aes(x = Temp, y = Wind)) +
+  geom_point(color = "grey") +  # Set points to grey
+  geom_point(aes(x = mean(Temp), y = mean(Wind)), 
+             color = "black", size = 2, shape = 19) +# Add a bold point for the average
+  geom_point(data = subset(data, Wind > mean(Wind)), 
+             aes(x = Temp, y = Wind), 
+             color = "#e37c07") +  # Color points above the average line in yellow
+  geom_text(aes(x = mean(Temp), y = mean(Wind), label = "AVG"), 
+            vjust = 1.5, hjust = 1) +
+  geom_hline(yintercept = mean(data$Wind), 
+             linetype = "longdash", color = "black") +  # Add a line parallel to the x-axis
+  theme(axis.title.y = element_text(angle = 90, hjust = 1),  # Align y-axis label to the left
+        axis.title.x = element_text(hjust = 0),  # Align x-axis label to the left
+        panel.grid.major = element_blank(),  # Change background
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "gray")) + 
+  ggtitle("Scatterplot of Data")  # Add a title
+```
+
+<img src="figuresunnamed-chunk-3-1.png" width="100%" />

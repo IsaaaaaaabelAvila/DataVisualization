@@ -25,8 +25,10 @@ library(DT)
 ```
 
 ```{r DATA}
-data <- head(airquality[, c("Day", "Temp")], 10)
+data <- head(airquality[, c("Day", "Temp", "Wind", "Ozone")], 20)
 ```
+
+# Line - Single Series
 
 ```{r}
 # Create line chart theme
@@ -67,3 +69,43 @@ ggplot(data, aes(x = Day, y = Temp)) +
     color = "#014991",
     fontface = "bold")
 ```
+
+# Line - Multiple Series
+
+```{r}
+ggplot(data, aes(x = Day)) +
+  geom_line(aes(y = Temp), color = "#0253BC") +  # Blue series
+  geom_line(aes(y = Wind), color = "grey") +  # Grey series
+  geom_line(aes(y = Ozone), color = "grey") +  # Grey series
+  labs(title = "Multiple Series Line Graph", x = "X-Axis", y = "Y-Axis")+
+  geom_text(aes(x = 19, y = data$Temp[20]+7, label = "Series 1"), hjust = 0, color = "#0253BC") +  # Label for Series 1
+  geom_text(aes(x = 19, y = data$Wind[20]+7, label = "Series 2"), hjust = 0, color = "grey") +  # Label for Series 2
+  geom_text(aes(x = 19, y = data$Ozone[20]-5, label = "Series 3"), hjust = 0, color = "grey") +  # Label for Series 3
+  theme(axis.title.y = element_text(angle = 90, hjust = 1),  # Align y-axis label to the left
+        axis.title.x = element_text(hjust = 0),  # Align x-axis label to the left
+        panel.grid.major = element_blank(),  # Change background
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "gray"))
+```
+
+# Line - Slope
+
+```{r}
+data2 <- data.frame(
+  Category = c("A", "B", "C", "D"),
+  Value_2020 = c(10, 20, 15, 30),
+  Value_2021 = c(15, 22, 14, 35)
+)
+
+# Calculate the slopes (changes in values)
+data2$Slope <- data2$Value_2021 - data2$Value_2020
+
+# Create a slope graph
+ggplot(data2, aes(x = Category, y = Value_2020)) +
+  geom_line(aes(yend = Value_2021), arrow = arrow(type = "closed", length = unit(0.1, "inches"))) +
+  geom_text(aes(label = Slope), hjust = 0, vjust = 0.5, nudge_x = 0.1) +
+  labs(title = "Slope Graph", x = "Category", y = "Value in 2020") +
+  theme_minimal()
+```
+

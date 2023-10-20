@@ -1,6 +1,9 @@
 ---
 title: 'Data Visualization: Tables'
 output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r, include = FALSE}
@@ -22,6 +25,17 @@ library(formattable)
 library(DT)
 ```
 
+# T A B L E
+
+One thing to keep in mind with a table is that you want the design to
+fade into the background, letting the data take center stage. Don't let
+heavy borders or shading compete for attention. Instead, think of using
+light borders or simply white space to set apart elements of the table.
+
+Borders should be used to improve the legibility of your table. Think
+about pushing them to the background by making them grey, or getting rid
+of them altogether. The data should be what stands out, not the borders.
+
 ```{r SIMPLE TABLE}
 data <- head(airquality[, c("Day", "Temp")], 10)
 
@@ -33,6 +47,16 @@ simple_table <- formattable(data,
 # Adjust the simple tables' width
 as.htmlwidget(simple_table, width = 400)
 ```
+
+# H E A T M A P
+
+A heatmap is a way to visualize data in tabular format, where in place
+of (or in addition to) the numbers, you leverage colored cells that
+convey the relative magnitude of the numbers.
+
+To reduce this mental processing, we can use color saturation to provide
+visual cues, helping our eyes and brains more quickly target the
+potential points of interest.
 
 ```{r CONDITIONALLY FORMATTED CELLS}
 # Define a table with conditionally formatted cells
@@ -70,4 +94,3 @@ cond_table3 <- formattable(data,
 # Adjust the conditionally formatted tables' width
 as.htmlwidget(cond_table3, width = 400)
 ```
-
