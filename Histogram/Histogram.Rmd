@@ -1,0 +1,51 @@
+---
+title: 'Data Visualization: Histogram'
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "figures",
+  out.width = "100%"
+)
+```
+
+```{r LIBRARIES, message=FALSE, warning=FALSE}
+library(data.table)
+library(dplyr)
+
+library(ggplot2)
+library(scales)
+library(formattable)
+library(DT)
+```
+
+```{r DATA}
+data <- head(airquality[, c("Day", "Temp")], 10)
+```
+
+```{r}
+# Create bar chart theme
+theme_swd_bar <-   theme(
+  plot.title = element_text(size = rel(1.75), color = "#000000"),
+  text = element_text(color = "#979797"),
+  axis.title.x = element_text(hjust = 0, vjust = -0.5),
+  axis.title.y = element_text(hjust = 1),
+  line = element_blank(),
+  rect = element_blank()
+)
+
+# Properly format the commas while also removing the decimal places.
+scaleFUN <- function(x) format(round(as.numeric(x), 0), nsmall=0, big.mark=",")
+
+# Apply bar chart theme to the geom_bar
+ggplot(data, aes(x = Temp)) +
+  geom_histogram(binwidth=3, #number segments
+                 color = "#014991", fill = "#014991") +
+  labs(title = "Temperature in some Days") +
+  theme_swd_bar
+```
